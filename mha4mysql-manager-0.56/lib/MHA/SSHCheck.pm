@@ -105,7 +105,8 @@ sub do_ssh_connection_check {
 " Connecting via SSH from $src->{ssh_user}\@$src->{ssh_host}($src->{ssh_ip}:$src->{ssh_port}) to $dst->{ssh_user}\@$dst->{ssh_host}($dst->{ssh_ip}:$dst->{ssh_port}).."
         );
         my $command =
-"ssh $MHA::ManagerConst::SSH_OPT_CHECK -p $src->{ssh_port} $src->{ssh_user}\@$src->{ssh_ip} \"ssh $MHA::ManagerConst::SSH_OPT_CHECK -p $dst->{ssh_port} $dst->{ssh_user}\@$dst->{ssh_ip} exit 0\"";
+#"ssh $MHA::ManagerConst::SSH_OPT_CHECK -p $src->{ssh_port} $src->{ssh_user}\@$src->{ssh_ip} \"ssh $MHA::ManagerConst::SSH_OPT_CHECK -p $dst->{ssh_port} $dst->{ssh_user}\@$dst->{ssh_ip} exit 0\"";
+"ssh $MHA::ManagerConst::SSH_OPT_CHECK -p $src->{ssh_port} $src->{ssh_user}\@$src->{ssh_ip} \"exit 0\"";
         my ( $high, $low ) = MHA::ManagerUtil::exec_system( $command, $file );
         if ( $high != 0 || $low != 0 ) {
           $pplog->error(
